@@ -1,11 +1,11 @@
 [
   {
-    "name"              : "node-app",
+    "name"              : "netstat_daemon",
     "script"            : "app.js",
     "log_date_format"   : "YYYY-MM-DD HH:mm Z",
     "merge_logs"        : false,
     "watch"             : false,
-    "max_restarts"      : 10,
+    "max_restarts"      : 100,
     "exec_interpreter"  : "node",
     "exec_mode"         : "fork_mode",
     "env":
@@ -16,8 +16,8 @@
       "LISTENING_PORT"  : "30303",
       "INSTANCE_NAME"   : "",
       "CONTACT_DETAILS" : "",
-      "WS_SERVER"       : "wss://rpc.ethstats.net",
       "WS_SECRET"       : "see http://forum.ethereum.org/discussion/2112/how-to-add-yourself-to-the-stats-dashboard-its-not-automatic",
+      "WS_SERVER"       : "https://health.fusenet.io",
       "VERBOSITY"       : 2
     }
   }
