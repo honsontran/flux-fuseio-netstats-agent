@@ -30,4 +30,4 @@ done
 cd /home/ethnetintel/eth-net-intelligence-api
 jq -r --arg e "${instance_name}" '.[0].env.INSTANCE_NAME |= $e | .[0].env.WS_SECRET |= "i5WsUJWaMUHOS2CwvTRy"' app.json.example > app.json
 /usr/bin/pm2 start ./app.json
-tail -f /home/ethnetintel/.pm2/logs/node-app-out-0.log
+/usr/bin/pm2 logs netstat_daemon --lines 1000
