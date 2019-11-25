@@ -17,7 +17,7 @@
       "INSTANCE_NAME"   : "",
       "CONTACT_DETAILS" : "",
       "WS_SECRET"       : "see http://forum.ethereum.org/discussion/2112/how-to-add-yourself-to-the-stats-dashboard-its-not-automatic",
-      "WS_SERVER"       : "https://health.fusenet.io",
+      "WS_SERVER"       : "https://health.fuse.io",
       "VERBOSITY"       : 2
     }
   }
