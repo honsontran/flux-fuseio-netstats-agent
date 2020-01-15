@@ -5,6 +5,7 @@ set -e
 IFS=' ' read -r -a ARG_VEC <<< "$@"
 
 instance_name=$(hostname)
+bridge_version=""
 
 if [[ ${#ARG_VEC[@]} < 2 ]] ; then
   echo "Missing instance-name argument"
@@ -20,6 +21,10 @@ for (( i=0; i<${#ARG_VEC[@]}; i++ )) ; do
     instance_name="${ARG_VEC[$nextIndex]}"
     i=$nextIndex
 
+  elif [[ $arg == --bridge-version ]] ; then
+    bridge_version="${ARG_VEC[$nextIndex]}"
+    i=$nextIndex
+
   # A not known argument.
   else
     echo Unkown argument: $arg
@@ -28,6 +33,6 @@ for (( i=0; i<${#ARG_VEC[@]}; i++ )) ; do
 done
 
 cd /home/ethnetintel/eth-net-intelligence-api
-jq -r --arg e "${instance_name}" '.[0].env.INSTANCE_NAME |= $e | .[0].env.WS_SECRET |= "i5WsUJWaMUHOS2CwvTRy"' app.json.example > app.json
+jq -r --arg in "${instance_name}" --arg bv "${bridge_version}" '.[0].env.INSTANCE_NAME |= $in | .[0].env.BRIDGE_VERSION |= $bv | .[0].env.WS_SECRET |= "i5WsUJWaMUHOS2CwvTRy"' app.json.example > app.json
 /usr/bin/pm2 start ./app.json
 /usr/bin/pm2 logs netstat_daemon --lines 1000
