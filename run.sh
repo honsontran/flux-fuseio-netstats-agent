@@ -101,7 +101,8 @@ ARGS=$(getopt -a --options n:i:r:b:a:p:f:c:h --longoptions network:,instance-nam
 eval set -- "$ARGS"
 
 # If no arguments are provided exit
-if [[ $? -ne 0 ]]; then
+if [[ "$#" -ne 0 ]]; then
+    help
     exit 1
 fi
 

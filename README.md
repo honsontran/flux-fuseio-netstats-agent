@@ -17,6 +17,7 @@ Fetch and run the build shell. This will install everything you need: latest eth
 ```bash
 bash <(curl https://raw.githubusercontent.com/cubedro/eth-net-intelligence-api/master/bin/build.sh)
 ```
+
 ## Installation as docker container (optional)
 
 There is a `Dockerfile` in the root directory of the repository. Please read through the header of said file for
@@ -49,3 +50,35 @@ Run it using pm2:
 cd ~/bin
 pm2 start processes.json
 ```
+
+## Run with run.sh script
+
+ [run.sh](./run.sh) was created for easy development and start PM2 Netstats agent process related to Fuse / Spark Network.
+
+ > Note: there are some custom fields send to the netstats-dashboard WebSocket service. Could be modified or added in https://github.com/fuseio/netstats-dashboard
+
+ ```bash
+ ./run.sh
+
+ Netstats Agent - Startup script
+
+ Description:
+   Script allow to generate processes.json file and run Netstats agent (NodeJS application).
+
+ Note:
+   This script is running in Docker environment (Linux - based Docker images).
+
+ Usage:
+   ./quickstart.sh [--network|--instance-name|--role|--bridge-version|--netstats-version|--fuseapp-version|--contact-details|--help]
+
+ Options:
+   --network                   Network name. Example: 'fuse', 'spark'
+  --instance-name             Node name in https://health.fuse.io or https://health.fusespark.io. Example: 'my-personal-node'
+  --role                      Node role: Example: 'Node', 'Bootnode', etc.
+  --bridge-version            Bridge version (Note: specify it if your role is 'Bridge'). Example: '1.0.0'
+  --netstats-version          Netstats agent version. Example: '1.0.0'
+  --parity-version            Fuse / Spark Network version based on OE Parity client. Example: '2.0.2'
+  --fuseapp-version           Validator app version (Note: specify it if your role is 'Validator' and 'Bridge'). Example: '1.0.0'
+  --contact-details           Contact details. Example: 'cto@fuse.io'
+  --help
+ ```
