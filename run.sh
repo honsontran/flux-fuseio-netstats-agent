@@ -25,19 +25,19 @@ function help() {
     echo "  Script allow to generate processes.json file and run Netstats agent (NodeJS application)."
     echo
     echo "Note:"
-    echo "  run.sh supports next Linux / Unix based distributions: Ubuntu, Debian, Fedora, CentOS, RHEL."
+    echo "  This script is running in Docker environment (Linux - based Docker images)."
     echo
     echo "Usage:"
-    echo "  ./quickstart.sh [--node-key|--role|--contact-details|--network-version|--netstats-version|--validator-app-version|--help]"
+    echo "  ./quickstart.sh [--network|--instance-name|--role|--bridge-version|--netstats-version|--fuseapp-version|--contact-details|--help]"
     echo
     echo "Options:"
     echo "  --network                   Network name. Example: 'fuse', 'spark'"
-    echo "  --node-key                  Node name in https://health.fuse.io or https://health.fusespark.io. Example: 'my-personal-node'"
+    echo "  --instance-name             Node name in https://health.fuse.io or https://health.fusespark.io. Example: 'my-personal-node'"
     echo "  --role                      Node role: Example: 'Node', 'Bootnode', etc."
     echo "  --bridge-version            Bridge version (Note: specify it if your role is 'Bridge'). Example: '1.0.0'"
     echo "  --netstats-version          Netstats agent version. Example: '1.0.0'"
     echo "  --parity-version            Fuse / Spark Network version based on OE Parity client. Example: '2.0.2'"
-    echo "  --validator-app-version     Validator app version (Note: specify it if your role is 'Validator' and 'Bridge'). Example: '1.0.0'"
+    echo "  --fuseapp-version           Validator app version (Note: specify it if your role is 'Validator' and 'Bridge'). Example: '1.0.0'"
     echo "  --contact-details           Contact details. Example: 'cto@fuse.io'"
     echo "  --help                      Help page"
 }
@@ -96,7 +96,7 @@ function generates_file() {
 EOF
 }
 
-ARGS=$(getopt -a --options n:k:r:b:a:p:v:c:h --longoptions network:,node-key:,role:,bridge-version:,netstats-version:,parity-version:,validator-app-version:,contact-details:,help -- "$@")
+ARGS=$(getopt -a --options n:i:r:b:a:p:f:c:h --longoptions network:,instance-name:,role:,bridge-version:,netstats-version:,parity-version:,fuseapp-version:,contact-details:,help -- "$@")
 
 eval set -- "$ARGS"
 
@@ -111,7 +111,7 @@ while true; do
         NETWORK="$2"
         shift 2
         ;;
-    -k | --node-key)
+    -i | --instance-name)
         INSTANCE_NAME="$2"
         shift 2
         ;;
@@ -131,7 +131,7 @@ while true; do
         PARITY_VERSION="$2"
         shift 2
         ;;
-    -v | --validator-app-version)
+    -f | --fuseapp-version)
         VALIDATOR_APP_VERSION="$2"
         shift 2
         ;;
