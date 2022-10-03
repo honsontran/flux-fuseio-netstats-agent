@@ -10,6 +10,7 @@ ROLE=""
 BRIDGE_VERSION=""
 FUSE_APP_VERSION=""
 NETSTATS_VERSION=""
+PARITY_VERSION=""
 CONTACT_DETAILS="cto@fuse.io"
 
 # Specify default WS parameters
@@ -35,6 +36,7 @@ function help() {
     echo "  --role                      Node role: Example: 'Node', 'Bootnode', etc."
     echo "  --bridge-version            Bridge version (Note: specify it if your role is 'Bridge'). Example: '1.0.0'"
     echo "  --netstats-version          Netstats agent version. Example: '1.0.0'"
+    echo "  --parity-version            Fuse / Spark Network version based on OE Parity client. Example: '2.0.2'"
     echo "  --validator-app-version     Validator app version (Note: specify it if your role is 'Validator' and 'Bridge'). Example: '1.0.0'"
     echo "  --contact-details           Contact details. Example: 'cto@fuse.io'"
     echo "  --help                      Help page"
@@ -83,6 +85,7 @@ function generates_file() {
             "BRIDGE_VERSION": "${BRIDGE_VERSION}",
             "FUSE_APP_VERSION": "${FUSE_APP_VERSION}",
             "NETSTATS_VERSION": "${NETSTATS_VERSION}",
+            "PARITY_VERSION": "${PARITY_VERSION}",
             "CONTACT_DETAILS": "${CONTACT_DETAILS}",
             "WS_SERVER": "${WS_SERVER}",
             "WS_SECRET": "${WS_SECRET}",
@@ -93,7 +96,7 @@ function generates_file() {
 EOF
 }
 
-ARGS=$(getopt -a --options n:k:r:b:a:v:c:h --longoptions network:,node-key:,role:,bridge-version:,netstats-version:,validator-app-version:,contact-details:,help -- "$@")
+ARGS=$(getopt -a --options n:k:r:b:a:p:v:c:h --longoptions network:,node-key:,role:,bridge-version:,netstats-version:,parity-version:,validator-app-version:,contact-details:,help -- "$@")
 
 eval set -- "$ARGS"
 
@@ -122,6 +125,10 @@ while true; do
         ;;
     -a | --netstats-version)
         NETSTATS_VERSION="$2"
+        shift 2
+        ;;
+    -p | --parity-version)
+        PARITY_VERSION="$2"
         shift 2
         ;;
     -v | --validator-app-version)
