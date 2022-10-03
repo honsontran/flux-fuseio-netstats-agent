@@ -1,29 +1,17 @@
-FROM debian
+FROM node:18.10.0-alpine3.15
+WORKDIR /app
 
-RUN apt-get update &&\
-    apt-get install -y curl git-core &&\
-    curl -sL https://deb.nodesource.com/setup_10.x | bash - &&\
-    apt-get update &&\
-    apt-get install -y nodejs
+# Install bash
+RUN apk --no-cache add bash
 
-RUN apt-get update &&\
-    apt-get install -y build-essential
+# Copy all needed files
+COPY . .
 
-RUN apt-get update &&\
-    apt-get install -y jq
+# Install needed pacakges
+RUN npm install
 
-RUN adduser ethnetintel
+# Install PM2
+RUN npm install pm2 -g
 
-RUN cd /home/ethnetintel &&\
-    git clone https://github.com/fuseio/eth-net-intelligence-api &&\
-    cd eth-net-intelligence-api &&\
-    npm install &&\
-    npm install -g pm2
-
-COPY run.sh /home/ethnetintel/run.sh
-
-RUN chmod +x /home/ethnetintel/run.sh &&\
-    chown -R ethnetintel. /home/ethnetintel
-
-USER ethnetintel
-ENTRYPOINT ["/home/ethnetintel/run.sh"]
+# Run!
+ENTRYPOINT ["/app/run.sh"]
