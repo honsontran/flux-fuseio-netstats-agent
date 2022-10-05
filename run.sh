@@ -133,7 +133,7 @@ while true; do
         shift 2
         ;;
     -f | --fuseapp-version)
-        VALIDATOR_APP_VERSION="$2"
+        FUSE_APP_VERSION="$2"
         shift 2
         ;;
     -c | --contact-details)
