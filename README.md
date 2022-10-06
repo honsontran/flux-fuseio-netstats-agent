@@ -1,14 +1,13 @@
 Ethereum Network Intelligence API
 ============
-[![Build Status][travis-image]][travis-url] [![dependency status][dep-image]][dep-url]
 
 This is the backend service which runs along with ethereum and tracks the network status, fetches information through JSON-RPC and connects through WebSockets to [eth-netstats](https://github.com/cubedro/eth-netstats) to feed information. For full install instructions please read the [wiki](https://github.com/ethereum/wiki/wiki/Network-Status).
 
 
 ## Prerequisite
-* eth, geth or pyethapp
-* node
-* npm
+
+ * node
+ * npm
 
 
 ## Installation on an Ubuntu EC2 Instance
@@ -18,6 +17,7 @@ Fetch and run the build shell. This will install everything you need: latest eth
 ```bash
 bash <(curl https://raw.githubusercontent.com/cubedro/eth-net-intelligence-api/master/bin/build.sh)
 ```
+
 ## Installation as docker container (optional)
 
 There is a `Dockerfile` in the root directory of the repository. Please read through the header of said file for
@@ -25,7 +25,7 @@ instructions on how to build/run/setup. Configuration instructions below still a
 
 ## Configuration
 
-Configure the app modifying [processes.json](/eth-net-intelligence-api/blob/master/processes.json). Note that you have to modify the backup processes.json file located in `./bin/processes.json` (to allow you to set your env vars without being rewritten when updating).
+Configure the app modifying [processes.json](./processes.json.example). You could modify next block:
 
 ```json
 "env":
@@ -51,17 +51,34 @@ cd ~/bin
 pm2 start processes.json
 ```
 
-## Updating
+## Run with run.sh script
 
-To update the API client use the following command:
+ [run.sh](./run.sh) was created for easy development and start PM2 Netstats agent process related to Fuse / Spark Network.
 
-```bash
-~/bin/www/bin/update.sh
-```
+ > Note: there are some custom fields send to the netstats-dashboard WebSocket service. Could be modified or added in https://github.com/fuseio/netstats-dashboard
 
-It will stop the current netstats client processes, automatically detect your ethereum implementation and version, update it to the latest develop build, update netstats client and reload the processes.
+ ```bash
+ ./run.sh
 
-[travis-image]: https://travis-ci.org/cubedro/eth-net-intelligence-api.svg
-[travis-url]: https://travis-ci.org/cubedro/eth-net-intelligence-api
-[dep-image]: https://david-dm.org/cubedro/eth-net-intelligence-api.svg
-[dep-url]: https://david-dm.org/cubedro/eth-net-intelligence-api
+ Netstats Agent - Startup script
+
+ Description:
+   Script allow to generate processes.json file and run Netstats agent (NodeJS application).
+
+ Note:
+   This script is running in Docker environment (Linux - based Docker images).
+
+ Usage:
+   ./quickstart.sh [--network|--instance-name|--role|--bridge-version|--netstats-version|--fuseapp-version|--contact-details|--help]
+
+ Options:
+   --network                   Network name. Example: 'fuse', 'spark'
+  --instance-name             Node name in https://health.fuse.io or https://health.fusespark.io. Example: 'my-personal-node'
+  --role                      Node role: Example: 'Node', 'Bootnode', etc.
+  --bridge-version            Bridge version (Note: specify it if your role is 'Bridge'). Example: '1.0.0'
+  --netstats-version          Netstats agent version. Example: '1.0.0'
+  --parity-version            Fuse / Spark Network version based on OE Parity client. Example: '2.0.2'
+  --fuseapp-version           Validator app version (Note: specify it if your role is 'Validator' and 'Bridge'). Example: '1.0.0'
+  --contact-details           Contact details. Example: 'cto@fuse.io'
+  --help
+ ```
