@@ -15,7 +15,7 @@ CONTACT_DETAILS="cto@fuse.io"
 
 # Specify default WS parameters
 WS_SERVER="wss://localhost:3000/"
-WS_SECRET="Aa1234567"
+WS_SECRET="i5WsUJWaMUHOS2CwvTRy"
 
 # Help
 function help() {
@@ -50,13 +50,11 @@ function generates_file() {
 
         # Fuse Network
         WS_SERVER="https://health.fuse.io/ws"
-        WS_SECRET="i5WsUJWaMUHOS2CwvTRy"
 
     elif [[ "$NETWORK" == "spark" ]]; then
 
         # Spark Network
         WS_SERVER="https://health.fusespark.io/ws"
-        WS_SECRET="jV65F6mWkDy6oCbddiXZ"
 
     else
         echo "Unrecognized network name. Valid network: 'fuse', 'spark'."
