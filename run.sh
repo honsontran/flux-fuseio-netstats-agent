@@ -96,13 +96,13 @@ function generates_file() {
 EOF
 }
 
-ARGS=$(getopt -a --options n:i:r:b:a:p:f:c:h --longoptions network:,instance-name:,role:,bridge-version:,netstats-version:,parity-version:,fuseapp-version:,contact-details:,help -- "$@")
+ARGS=$(getopt -a -u --options n:i:r:b:a:p:f:c:h --longoptions network:,instance-name:,role:,bridge-version:,netstats-version:,parity-version:,fuseapp-version:,contact-details:,help -- $@)
 
 eval set -- "$ARGS"
 
 # If no arguments are provided exit
-if [[ "$#" -ne 0 ]]; then
-    help
+if [[ $@ == "--" ]]; then
+    echo "No arguments provided."
     exit 1
 fi
 
@@ -150,9 +150,13 @@ while true; do
         ;;
     *)
         echo "Unexpected option: $1"
+        shift 2
+        break
         ;;
     esac
 done
+
+shift "$((OPTIND - 1))"
 
 # Generate JSON file
 generates_file
