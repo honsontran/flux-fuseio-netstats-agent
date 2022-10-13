@@ -11,7 +11,7 @@ BRIDGE_VERSION=""
 FUSE_APP_VERSION=""
 NETSTATS_VERSION=""
 PARITY_VERSION=""
-CONTACT_DETAILS="cto@fuse.io"
+CONTACT_DETAILS=""
 
 # Specify default WS parameters
 WS_SERVER="wss://localhost:3000/"
