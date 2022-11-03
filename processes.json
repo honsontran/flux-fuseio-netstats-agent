@@ -1,0 +1,28 @@
+[
+    {
+        "name": "netstats-agent",
+        "script": "app.js",
+        "log_date_format": "YYYY-MM-DD HH:mm Z",
+        "merge_logs": false,
+        "watch": false,
+        "max_restarts": 10,
+        "exec_interpreter": "node",
+        "exec_mode": "fork_mode",
+        "env": {
+            "NODE_ENV": "production",
+            "RPC_HOST": "http://fluxfuserpc_fuserpc:31000",
+            "RPC_PORT": "31000",
+            "LISTENING_PORT": "31001",
+            "INSTANCE_NAME": "flux-fuse-rpc",
+            "ROLE": "node",
+            "BRIDGE_VERSION": "",
+            "FUSE_APP_VERSION": "2.0.0",
+            "NETSTATS_VERSION": "1.0.0",
+            "PARITY_VERSION": "2.0.2",
+            "CONTACT_DETAILS": "",
+            "WS_SERVER": "https://health.fuse.io/ws",
+            "WS_SECRET": "i5WsUJWaMUHOS2CwvTRy",
+            "VERBOSITY": 2
+        }
+    }
+]
